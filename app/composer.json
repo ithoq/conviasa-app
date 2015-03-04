@@ -1,0 +1,21 @@
+{
+    "config": {
+        "vendor-dir": "Vendor"
+    },
+
+    "require": {
+        "slywalker/boost_cake": "*",
+        "opauth/opauth": "*",
+        "mjohnson/utility": "*",
+        "webandcow/bs_helpers": "*",
+        "asper/cakephp-enum-behavior": "*",
+        "cakephp/localized": "*",
+        "mjohnson/uploader": "*",
+        "mjohnson/utility": "1.*",
+        "mjohnson/decoda": "*",
+        "titon/utility": "*",
+        "phpunit/phpunit": "3.7.32",
+        "torifat/cake-menu_builder": "*",
+        "friendsofcake/cakepdf": "*"
+    }
+}
