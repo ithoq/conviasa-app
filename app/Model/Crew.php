@@ -140,6 +140,14 @@ class Crew extends AppModel {
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
+			'validate_semestral_date' => array(
+				'rule' => array('validateSemestralDate'),
+				'message' => 'Recuerde que la fecha de simulador no puede ser mayor a 7 meses',
+				// 'allowEmpty' => false,
+				// 'required' => true,
+				//'last' => false, // Stop validation after this rule
+				'on' => 'update', // Limit validation to 'create' or 'update' operations
+			)
 		),
 		'annual_date' => array(
 			'notEmpty' => array(
@@ -148,8 +156,48 @@ class Crew extends AppModel {
 				'allowEmpty' => false,
 				'required' => true,
 				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+				'on' => 'update', // Limit validation to 'create' or 'update' operations
 			),
+			'validate_annual_date' => array(
+				'rule' => array('validateAnnualDate'),
+				'message' => 'Recuerde que la fecha de simulador no puede ser mayor a 1 año',
+				// 'allowEmpty' => false,
+				// 'required' => true,
+				//'last' => false, // Stop validation after this rule
+				'on' => 'update', // Limit validation to 'create' or 'update' operations
+			)
 		),
 	);
+
+/**
+ * [validateSemestralDate description]
+ * @return [type] [description]
+ */
+	public function validateSemestralDate() {
+		$currentCrew = $this->find('first', array(
+			'conditions' => array(
+				'Id' => $this->data['Crew']['id'])));
+		$futureDate = date('Y-m-d', strtotime("+7 months", strtotime($currentCrew['Crew']['semestral_date'])));
+		if (strtotime($this->data['Crew']['semestral_date']) >= strtotime($futureDate) || strtotime($this->data['Crew']['semestral_date']) < strtotime($currentCrew['Crew']['semestral_date'])) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+/**
+ * [validateAnnualDate description]
+ * @return [type] [description]
+ */
+	public function validateAnnualDate() {
+		$currentCrew = $this->find('first', array(
+			'conditions' => array(
+				'Id' => $this->data['Crew']['id'])));
+		$futureDate = date('Y-m-d', strtotime("+12 months", strtotime($currentCrew['Crew']['annual_date'])));
+		if (strtotime($this->data['Crew']['annual_date']) >= strtotime($futureDate) || strtotime($this->data['Crew']['annual_date']) < strtotime($currentCrew['Crew']['annual_date'])) {
+			return false;
+		} else {
+			return true;
+		}
+	}
 }

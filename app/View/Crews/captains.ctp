@@ -1,14 +1,14 @@
 <div class="row">
 	<div class="col-md-12">
 		<div class="page-header">
-			<h1><?php echo __('Tripulantes'); ?></h1>
+			<h1><?php echo __('Capitanes'); ?></h1>
 		</div>
 		<?php echo $this->Session->flash(); ?>	
 	</div><!-- end col md 12 -->
 	<div class="col-xs-10">
 		<p>
 		<?php 
-			$this->Html->addCrumb(__('Tripulantes'));
+			$this->Html->addCrumb(__('Capitanes'));
 			echo $this->Html->getCrumbs(' > ', __('Inicio'));
 		?>
 		</p>
@@ -26,8 +26,8 @@
   <div class="col-lg-12">
     <div class="panel panel-default">
       <div class="panel-heading">
-      	<i class="fa fa-users"></i> - 
-        <?php echo __('Lista de tripulantes') ?>
+      	<i class="fa fa-plane"></i> - 
+        <?php echo __('Lista de Capitanes') ?>
       </div>
       <!-- /.panel-heading -->
       <div class="panel-body">
@@ -38,7 +38,6 @@
             <?php echo $this->Html->tableHeaders(array(
 							__('Nombre'),
 							__('Apellido'),
-							__('Tipo de Tripulación'),
 							__('Exp Simulador semestral'),
 							__('Exp Simulador anual'),
 							__('Visa'),
@@ -49,7 +48,6 @@
             <?php echo $this->Html->tableHeaders(array(
 							__('Nombre'),
 							__('Apellido'),
-							__('Tipo de Tripulación'),
 							__('Exp Simulador semestral'),
 							__('Exp Simulador anual'),
 							__('Visa'),
@@ -59,23 +57,23 @@
             <tbody>
 						<?php 
 						foreach ($crews as $key => $crew) :
-								$now = time(); // or your date as well
-							  $crew['Crew']['semestral_date'] = strtotime($crew['Crew']['semestral_date']);
-							  $crew['Crew']['annual_date'] = strtotime($crew['Crew']['annual_date']);
-								$datediffSemestral = abs($now - $crew['Crew']['semestral_date']);
-								$datediffSemestral = floor($datediffSemestral/(60*60*24));
-								if ($datediffSemestral <= 30) {
-									$crew['Crew']['semestral_date'] = '<b style="color: red">' . $this->Time->format($crew['Crew']['semestral_date'], '%d/%m/%Y') . '</b>';
-								} else {
-									$crew['Crew']['semestral_date'] = '<b>' . $this->Time->format($crew['Crew']['semestral_date'], '%d/%m/%Y') . '</b>';
-								}
-								$datediffAnnual = abs($now - $crew['Crew']['annual_date']);
-								$datediffAnnual = floor($datediffAnnual/(60*60*24));
-								if ($datediffAnnual <= 30) {
-									$crew['Crew']['annual_date'] = '<b style="color: red">' . $this->Time->format($crew['Crew']['annual_date'], '%d/%m/%Y') . '</b>';
-								} else {
-									$crew['Crew']['annual_date'] = '<b>' . $this->Time->format($crew['Crew']['annual_date'], '%d/%m/%Y') . '</b>';
-								}
+							$now = time(); // or your date as well
+						  $crew['Crew']['semestral_date'] = strtotime($crew['Crew']['semestral_date']);
+						  $crew['Crew']['annual_date'] = strtotime($crew['Crew']['annual_date']);
+							$datediffSemestral = abs($now - $crew['Crew']['semestral_date']);
+							$datediffSemestral = floor($datediffSemestral/(60*60*24));
+							if ($datediffSemestral <= 30) {
+								$crew['Crew']['semestral_date'] = '<b style="color: red">' . $this->Time->format($crew['Crew']['semestral_date'], '%d/%m/%Y') . '</b>';
+							} else {
+								$crew['Crew']['semestral_date'] = '<b>' . $this->Time->format($crew['Crew']['semestral_date'], '%d/%m/%Y') . '</b>';
+							}
+							$datediffAnnual = abs($now - $crew['Crew']['annual_date']);
+							$datediffAnnual = floor($datediffAnnual/(60*60*24));
+							if ($datediffAnnual <= 30) {
+								$crew['Crew']['annual_date'] = '<b style="color: red">' . $this->Time->format($crew['Crew']['annual_date'], '%d/%m/%Y') . '</b>';
+							} else {
+								$crew['Crew']['annual_date'] = '<b>' . $this->Time->format($crew['Crew']['annual_date'], '%d/%m/%Y') . '</b>';
+							}
 							$form =
 							$this->BsForm->create('Crew', array('action' => 'delete/' . $crew['Crew']['id'], 'id' => 'CrewDelete' . $crew['Crew']['id'])) .
 							__('<p>¿Seguro que desea eliminar el tripulante <b>%s</b>?</p>', $crew['Crew']['name']) .
@@ -83,7 +81,6 @@
 							echo $this->Html->tableCells(array(
 								$crew['Crew']['first_name'],
 								$crew['Crew']['last_name'],
-								$crew['Crew']['role_enum'],
 								$crew['Crew']['semestral_date'],
 								$crew['Crew']['annual_date'],
 								$crew['Crew']['visa'] == 1 ? __('Sí') : __('No'),

@@ -20,17 +20,17 @@ class Menu extends AppModel {
 					),
 					array(
 						'title' => 'Capitanes',
-						'url' => array('controller' => 'Crew', 'action' => 'add'),
+						'url' => array('controller' => 'Crews', 'action' => 'captains'),
 						'icon' => 'fa fa-plane'
 					),
 					array(
 						'title' => 'Primeros Oficiales',
-						'url' => array('controller' => 'Home', 'action' => 'oficers'),
+						'url' => array('controller' => 'Crews', 'action' => 'oficers'),
 						'icon' => 'fa fa-paper-plane'
 					),
 					array(
 						'title' => 'Instructores',
-						'url' => array('controller' => 'Home', 'action' => 'instructors'),
+						'url' => array('controller' => 'Crews', 'action' => 'instructors'),
 						'icon' => 'fa fa-graduation-cap'
 					),
 				);

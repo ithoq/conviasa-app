@@ -66,6 +66,40 @@ class CrewsController extends AppController {
 	}
 
 /**
+ * edit method
+ *
+ * @throws NotFoundException
+ * @param string $id
+ * @return void
+ */
+	public function edit($id = null) {
+		if (!$this->Crew->exists($id)) {
+			throw new NotFoundException(__('Tripulante inválido'));
+		}
+		if ($this->request->is(array('post', 'put'))) {
+			$semestralDate = str_replace('/', '-', $this->request->data['Crew']['semestral_date']);
+			$annualDate = str_replace('/', '-', $this->request->data['Crew']['annual_date']);
+			$this->request->data['Crew']['semestral_date'] = date('Y-m-d', strtotime($semestralDate));
+			$this->request->data['Crew']['annual_date'] = date('Y-m-d', strtotime($annualDate));
+			if ($this->Crew->save($this->request->data)) {
+				$this->Session->setFlash(__('El Tripulante ha sido editado.'), 'alert', array('class' => 'alert-success'));
+				return $this->redirect(array('action' => 'index'));
+			} else {
+				$this->set('crew', $this->Crew->enum('role'));
+				$this->Session->setFlash(__('El Tripulante no ha podido ser editado. Por favor, intente de nuevo.'), 'alert', array('class' => 'alert-danger'));
+			}
+		}
+		$this->Crew->recursive = -1;
+		$options = array('conditions' => array('Crew.' . $this->Crew->primaryKey => $id));
+		$this->request->data = $this->Crew->find('first', $options);
+		$this->request->data['Crew']['semestral_date'] = date('d/m/Y', strtotime($this->request->data['Crew']['semestral_date']));
+		$this->request->data['Crew']['annual_date'] = date('d/m/Y', strtotime($this->request->data['Crew']['annual_date']));
+		$this->request->data['Crew']['semestral_date'] = str_replace('-', '/', $this->request->data['Crew']['semestral_date']);
+		$this->request->data['Crew']['annual_date'] = str_replace('-', '/', $this->request->data['Crew']['annual_date']);
+		$this->set('crew', $this->Crew->enum('role'));
+	}
+
+/**
  * index method
  *
  * @return void
@@ -78,7 +112,7 @@ class CrewsController extends AppController {
  * [indexCaptain description]
  * @return [type] [description]
  */
-	public function indexCaptain() {
+	public function captains() {
 		$this->set('crews', $this->Crew->find('all', array('conditions' => array('role' => 'cap'))));
 	}
 
@@ -86,7 +120,7 @@ class CrewsController extends AppController {
  * [indexInstructors description]
  * @return [type] [description]
  */
-	public function indexInstructors() {
+	public function instructors() {
 		$this->set('crews', $this->Crew->find('all', array('conditions' => array('role' => 'tri'))));
 	}
 
@@ -94,7 +128,7 @@ class CrewsController extends AppController {
  * [indexOficers description]
  * @return [type] [description]
  */
-	public function indexOficers() {
+	public function oficers() {
 		$this->set('crews', $this->Crew->find('all', array('conditions' => array('role' => 'cop'))));
 	}
 }
