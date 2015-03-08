@@ -2,47 +2,8 @@
 App::uses('AppModel', 'Model');
 App::uses('SimplePasswordHasher', 'Controller/Component/Auth');
 App::uses('ConvertidorDeCaracteres', 'Model/General');
-/**
- * User Model
- *
- * @property MarketRate $MarketRate
- * @property PurchaseOrder $PurchaseOrder
- * @property DeliveryNote $DeliveryNote
- * @property Customer $Customer
- */
+
 class User extends AppModel {
-
-/**
- * Se declaran constantes y cada una de ellas recibe los
- * enum que están en la Base de datos para describir los Roles
- */
-	const ADMIN = 'admin';
-	const USER = 'user';
-
-/**
- * Se declara un arreglo que tiene asociados
- * las constantes declaradas con los enums de los roles
- * con los alias que se le asignan para una visualización comoda
- * en la vista*
- */
-	public $enum = array(
-		'role' =>
-			array(
-			'' => 'Escoja Una Opción',
-			self::ADMIN => 'Administrador',
-			self::USER => 'Usuario',
-		)
-	);
-
-	public $validationDomain = 'validation_errors';
-
-/**
- * Campos virtuales para comodidad en momento de hacer consultas
- * @var array
- */
-	public $virtualFields = array(
-		'name' => 'CONCAT(User.first_name, " ", User.last_name)'
-	);
 
 /**
  * Validation rules
@@ -110,94 +71,6 @@ class User extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			)
 		),
-		'first_name' => array(
-			'notEmpty' => array(
-				'rule' => array('notempty'),
-				'message' => 'El campo de nombre no puede estar vacio',
-				'allowEmpty' => false,
-				'required' => true,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-			'maxLength' => array(
-				'rule' => array('maxLength', 45),
-				'message' => 'Ha superado el número de caracteres permitidos (45)',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-		'last_name' => array(
-			'notEmpty' => array(
-				'rule' => array('notempty'),
-				'message' => 'El campo de apellido no puede estar vacio',
-				'allowEmpty' => false,
-				'required' => true,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-			'maxLength' => array(
-				'rule' => array('maxLength', 45),
-				'message' => 'Ha superado el número de caracteres permitidos (45)',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-		'position' => array(
-			'notEmpty' => array(
-				'rule' => array('notEmpty'),
-				'message' => 'El cargo es requerido',
-				'allowEmpty' => true,
-				'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-			'maxLength' => array(
-				'rule' => array('maxLength', 45),
-				'message' => 'Ha superado el número de caracteres permitidos (45)',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-		'email' => array(
-			'notempty' => array(
-				'rule' => array('notempty'),
-				'message' => 'El email es un campo requerido',
-				'allowEmpty' => false,
-				'required' => true,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-			'email' => array(
-				'rule' => array('email'),
-				'message' => 'Formato de email invalido',
-				//'allowEmpty' => false,
-				//'required' => true,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-			'unique' => array(
-				'rule' => array('isUnique'),
-				'message' => 'Correo electrónico ya existente en el sistema',
-				//'allowEmpty' => false,
-				//'required' => true,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-			'maxLength' => array(
-				'rule' => array('maxLength', 70),
-				'message' => 'Ha superado el número de caracteres permitidos (70)',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
 		'password' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
@@ -228,81 +101,6 @@ class User extends AppModel {
 				'required' => true
 			)
 		)
-	);
-
-	//The Associations below have been created with all possible keys, those that are not needed can be removed
-
-/**
- * hasMany associations
- *
- * @var array
- */
-	public $hasMany = array(
-		'MarketRate' => array(
-			'className' => 'MarketRate',
-			'foreignKey' => 'user_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		),
-		'PurchaseOrder' => array(
-			'className' => 'PurchaseOrder',
-			'foreignKey' => 'user_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		),
-		'DeliveryNote' => array(
-			'className' => 'DeliveryNote',
-			'foreignKey' => 'user_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		),
-		'Customer' => array(
-			'className' => 'Customer',
-			'foreignKey' => 'user_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		),
-		'Provider' => array(
-			'className' => 'Provider',
-			'foreignKey' => 'user_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		),
 	);
 
 /**

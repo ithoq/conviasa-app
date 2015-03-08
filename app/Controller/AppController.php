@@ -32,7 +32,7 @@ App::uses('Controller', 'Controller');
  */
 class AppController extends Controller {
 
-	public $helpers = array('Session', 'BsHelpers.Bs', 'BsHelpers.BsForm', 'Country');
+	public $helpers = array('Session', 'BsHelpers.Bs', 'BsHelpers.BsForm');
 
 /**
  * Selección del Tema Visual para la Aplicacion
@@ -45,7 +45,7 @@ class AppController extends Controller {
 		'Session' => array(),
 		'Auth' => array(
 			//Redirección después de hacer Login exitosamente
-			'loginRedirect' => array('controller' => 'home', 'action' => 'display'),
+			'loginRedirect' => array('controller' => 'crews', 'action' => 'index'),
 			//Redirección después de hacer LogOut del Usuario
 			'logoutRedirect' => array('controller' => 'users', 'action' => 'login'),
 			//Mensaje de Error al no poseer privilegios
@@ -85,7 +85,6 @@ class AppController extends Controller {
  * @return void
  */
 	public function beforeFilter() {
-		// $this->Auth->allow();
 		if (isset($this->Auth->user()['id'])) {
 			$this->loadModel('User');
 			if (!$this->User->exists($this->Auth->user()['id'])) {
@@ -101,9 +100,6 @@ class AppController extends Controller {
 		//Si el usuario está logeado iniciar el menú respecto a su rol
 		$this->loadModel('Menu');
 		$this->set('mainMenu', $this->Menu->adminMenu);
-		if ($this->Auth->loggedIn()) {
-
-		}
 
 		//Evitar que el usuario pueda introducir un id por formulario
 		foreach ($this->request->data as $key => $value) {

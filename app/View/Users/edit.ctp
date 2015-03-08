@@ -33,22 +33,6 @@
 								'placeholder' => __('Usuario'),
 								'label' => __('Usuario'),
 								'minlength' => '5'));
-							echo $this->BsForm->input('first_name', array(
-								'placeholder' => __('Nombre'),
-								'label' => __('Nombre')));
-							echo $this->BsForm->input('last_name', array(
-								'placeholder' => __('Apellido'),
-								'label' => __('Apellido')));
-							echo $this->BsForm->input('position', array(
-								'placeholder' => __('Posición'),
-								'label' => __('Posición')));
-							echo $this->BsForm->input('email', array(
-								'placeholder' => __('Email'),
-								'label' => __('Email')));
-							echo $this->BsForm->select('role', $user, array(
-								'selected' => $this->params->data['User']['role'],
-								'required' => true,
-								'label' => __('Grupo')));
 							echo $this->BsForm->input('password', array(
 								'required' => false,
 								'placeholder' => __('Contraseña'),

@@ -3,7 +3,7 @@
 		<div class="col-md-4 col-md-offset-4">
 	    <div class="login-panel panel panel-info">
 	      <div class="panel-heading">
-	    		<h3 class="panel-title"><i class="fa fa-user"></i> - <?php echo __('MedsolutionsApp - Por favor inicie sesión') ?></h3>
+	    		<h3 class="panel-title"><i class="fa fa-user"></i> - <?php echo __('ConviasaApp - Por favor inicie sesión') ?></h3>
 	      </div>
 				<div class="panel-body">
 					<?php

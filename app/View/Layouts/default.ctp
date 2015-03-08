@@ -14,7 +14,7 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
-	echo $this->Bs->html5(__('MedsolutionsApp') . ': ' . $this->fetch('title'), __('MedsolutionsApp'), 'es');
+	echo $this->Bs->html5(__('ConviasaApp') . ': ' . $this->fetch('title'), __('ConviasaApp'), 'es');
 	echo $this->Html->meta('icon');
 
 	echo $this->fetch('meta');

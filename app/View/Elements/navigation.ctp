@@ -7,7 +7,7 @@
 		<span class="icon-bar"></span>
 		<span class="icon-bar"></span>
 		</button>
-		<?php echo $this->Html->link(__('MedsolutionsApp'), array('controller' => 'home', 'action' => 'display'), array('class' => 'navbar-brand')); ?>
+		<?php echo $this->Html->link(__('ConviasaApp'), array('controller' => 'home', 'action' => 'display'), array('class' => 'navbar-brand')); ?>
 	</div>
 	<!-- /.navbar-header -->
 	<ul class="nav navbar-top-links navbar-right">

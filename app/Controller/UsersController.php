@@ -1,6 +1,7 @@
 <?php
 App::uses('AppController', 'Controller');
 App::uses('ConvertidorDeCaracteres', 'Model/General');
+
 /**
  * Users Controller
  *
@@ -17,29 +18,6 @@ class UsersController extends AppController {
  */
 	public $components = array('Session');
 
-/**
- * Método para autorizar a un usuario común unicamente
- * editarse a si mismo y que solo el administrador pueda eliminar usuario
- * 
- * @param  array  $user El usuario que inició sesión
- * @return boolean       Si está autorizado o no.
- */
-	public function isAuthorized($user) {
-		if ($user['role'] == 'admin') {
-			return true;
-		} elseif ($this->request->params['action'] == 'edit') {
-			if ($user['id'] == $this->request->params['pass'][0]) {
-				return true;
-			} else {
-				$this->Session->setFlash($this->Auth->authError, 'alert', array('class' => 'alert-danger'));
-				return false;
-			}
-		} elseif ($this->request->params['action'] == 'delete') {
-			$this->Session->setFlash($this->Auth->authError, 'alert', array('class' => 'alert-danger'));
-			return false;
-		}
-		return true;
-	}
 
 /**
  * index method
@@ -48,7 +26,10 @@ class UsersController extends AppController {
  */
 	public function index() {
 		$this->User->recursive = -1;
-		$this->set('users', $this->User->find('all'));
+		$this->set('users', $this->User->find('all', array(
+			'conditions' => array(
+				'not' => array(
+					'username' => 'admin')))));
 	}
 
 /**
@@ -124,7 +105,6 @@ class UsersController extends AppController {
 				$this->Session->setFlash(__('Ha ocurrido un problema registrando al usuario, por favor intente de nuevo.'), 'alert', array('class' => 'alert-danger'));
 			}
 		}
-		$this->set('user', $this->User->enum('role'));
 	}
 
 /**
@@ -147,7 +127,7 @@ class UsersController extends AppController {
 				return $this->redirect(array('action' => 'index'));
 			} else {
 				$this->set('user', $this->User->enum('role'));
-				$this->Session->setFlash(__('El usuario no ha podido ser salvado. Por favor, intente de nuevo.'), 'alert', array('class' => 'alert-danger'));
+				$this->Session->setFlash(__('El usuario no ha podido ser editado. Por favor, intente de nuevo.'), 'alert', array('class' => 'alert-danger'));
 			}
 		} else {
 			$this->User->recursive = -1;
@@ -155,7 +135,6 @@ class UsersController extends AppController {
 			$this->request->data = $this->User->find('first', $options);
 		}
 		$this->request->data['User']['password'] = ''; //Se limpia el campo del password por seguridad
-		$this->set('user', $this->User->enum('role'));
 	}
 
 /**

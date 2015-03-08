@@ -15,7 +15,7 @@
  * @since         CakePHP(tm) v 0.10.0.1076
  * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
-	echo $this->Bs->html5(__('MedsolutionsApp') . ': ' . $this->fetch('title'), __('MedsolutionsApp'), 'es');
+	echo $this->Bs->html5(__('ConviasaApp') . ': ' . $this->fetch('title'), __('ConviasaApp'), 'es');
 	echo $this->Html->meta('icon');
 
 	echo $this->fetch('meta');

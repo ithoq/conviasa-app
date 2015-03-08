@@ -28,22 +28,6 @@
 					<dd>
 						<?php echo h($user['User']['username']); ?>
 					</dd>
-					<dt><?php echo __('Nombre'); ?></dt>
-					<dd>
-						<?php echo h($user['User']['first_name']); ?>
-					</dd>
-					<dt><?php echo __('Apellido'); ?></dt>
-					<dd>
-						<?php echo h($user['User']['last_name']); ?>
-					</dd>
-					<dt><?php echo __('Posición'); ?></dt>
-					<dd>
-						<?php echo h($user['User']['position']); ?>
-					</dd>
-					<dt><?php echo __('Email'); ?></dt>
-					<dd>
-						<?php echo h($user['User']['email']); ?>
-					</dd>
 					</br>
 					<dd></dd>
 					<dt><?php echo $this->Html->link(__('Volver'), array('action' => 'index'), array('class' => 'btn btn-primary')); ?></dt>
