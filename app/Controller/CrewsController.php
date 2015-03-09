@@ -52,7 +52,6 @@ class CrewsController extends AppController {
 			throw new NotFoundException(__('Tripulante inválido'));
 		}
 		try {
-			$this->request->allowMethod('post', 'delete');
 			if ($this->Crew->delete()) {
 				$this->Session->setFlash(__('El Tripulante ha sido eliminado satisfactoriamente.'), 'alert', array('class' => 'alert-success'));
 			} else {

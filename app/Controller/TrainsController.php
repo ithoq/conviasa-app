@@ -70,7 +70,6 @@ class TrainsController extends AppController {
 			throw new NotFoundException(__('Entrenamiento inválido'));
 		}
 		try {
-			$this->request->allowMethod('post', 'delete');
 			if ($this->Train->delete()) {
 				$this->Session->setFlash(__('El Entrenamiento ha sido eliminado satisfactoriamente.'), 'alert', array('class' => 'alert-success'));
 			} else {

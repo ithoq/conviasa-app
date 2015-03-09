@@ -150,7 +150,6 @@ class UsersController extends AppController {
 			throw new NotFoundException(__('Usuario inválido'));
 		}
 		try {
-			$this->request->allowMethod('post', 'delete');
 			if ($this->User->delete()) {
 				$this->Session->setFlash(__('El usuario ha sido eliminado satisfactoriamente.'), 'alert', array('class' => 'alert-success'));
 			} else {
