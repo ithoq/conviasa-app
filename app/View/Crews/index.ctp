@@ -64,14 +64,14 @@
 							  $crew['Crew']['annual_date'] = strtotime($crew['Crew']['annual_date']);
 								$datediffSemestral = abs($now - $crew['Crew']['semestral_date']);
 								$datediffSemestral = floor($datediffSemestral/(60*60*24));
-								if ($datediffSemestral <= 30) {
+								if ($datediffSemestral <= 60) {
 									$crew['Crew']['semestral_date'] = '<b style="color: red">' . $this->Time->format($crew['Crew']['semestral_date'], '%d/%m/%Y') . '</b>';
 								} else {
 									$crew['Crew']['semestral_date'] = '<b>' . $this->Time->format($crew['Crew']['semestral_date'], '%d/%m/%Y') . '</b>';
 								}
 								$datediffAnnual = abs($now - $crew['Crew']['annual_date']);
 								$datediffAnnual = floor($datediffAnnual/(60*60*24));
-								if ($datediffAnnual <= 30) {
+								if ($datediffAnnual <= 60) {
 									$crew['Crew']['annual_date'] = '<b style="color: red">' . $this->Time->format($crew['Crew']['annual_date'], '%d/%m/%Y') . '</b>';
 								} else {
 									$crew['Crew']['annual_date'] = '<b>' . $this->Time->format($crew['Crew']['annual_date'], '%d/%m/%Y') . '</b>';

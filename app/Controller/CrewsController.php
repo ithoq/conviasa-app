@@ -131,4 +131,28 @@ class CrewsController extends AppController {
 	public function oficers() {
 		$this->set('crews', $this->Crew->find('all', array('conditions' => array('role' => 'cop'))));
 	}
+
+	public function proposal() {
+		$captains = $this->Crew->find('all', array(
+			'conditions' => array(
+				'role' => 'cap'),
+			'order' => array(
+				'semestral_date DESC',
+				'annual_date',
+				'visa DESC')));
+		$oficers = $this->Crew->find('all', array(
+			'conditions' => array(
+				'role' => 'cop'),
+			'order' => array(
+				'semestral_date DESC',
+				'annual_date',
+				'visa DESC')));
+		if (count($captains) > count($oficers)) {
+			$this->set('index', count($captains));
+		} else {
+			$this->set('index', count($oficers));
+		}
+		$this->set('captains', $captains);
+		$this->set('oficers', $oficers);
+	}
 }
