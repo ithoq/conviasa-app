@@ -219,7 +219,7 @@ Configure::write('Session', array(
 		'defaults' => 'php',
 		'timeout' => 43200, // The session will timeout after 30 minutes of inactivity
 		//'cookieTimeout' => 1440, // The session cookie will live for at most 24 hours, this does not effect session timeouts
-		'cookieTimeout' => 0,
+		'cookieTimeout' => 1440,
 		'checkAgent' => false,
 		'autoRegenerate' => true, // causes the session expiration time to reset on each page load
 	));

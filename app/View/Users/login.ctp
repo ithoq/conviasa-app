@@ -23,7 +23,7 @@
 															'label' => __('Contraseña'),
 															'placeholder' => __('Contraseña'),
 															'between' => '<div class="col-md-12">'));
-						echo $this->BsForm->checkbox('auto_login', array('label' => '¿Recordar Sesión?'));
+						//echo $this->BsForm->checkbox('auto_login', array('label' => '¿Recordar Sesión?'));
 						echo $this->Form->submit(__('Entrar'), array(
 																					'class' => 'btn btn-success col-xs-4 col-xs-offset-4'));
 						echo $this->BsForm->end();

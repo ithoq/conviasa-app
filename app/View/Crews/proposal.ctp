@@ -148,5 +148,5 @@
 	</div>
 	<!-- /.row -->
 	<?php $this->append('script'); ?>
-	<?php echo $this->Html->script('/../js/crews/index'); ?>
+	<?php echo $this->Html->script('/js/crews/index'); ?>
 	<?php $this->end();

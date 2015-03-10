@@ -103,6 +103,3 @@
   <!-- /.col-lg-12 -->
 </div>
 <!-- /.row -->
-<?php $this->append('script'); ?>
-<?php echo $this->Html->script('/js/trains/index'); ?>
-<?php $this->end();

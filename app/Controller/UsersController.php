@@ -41,9 +41,10 @@ class UsersController extends AppController {
 	public function login() {
 		//Si el Usuario se encuentra ya Logeado en el sistema
 
-		if ($this->Session->check('Auth.User')) {
-			//Redirecciona al index del sistema
-			return $this->redirect($this->Auth->redirectUrl());
+		if ($this->User->validates()) {
+			if ($this->Auth->user()) {
+				return $this->redirect($this->Auth->redirectUrl());
+			}
 		}
 		//Si Uso el form para logearse (POST)
 		if ($this->request->is('post')) {

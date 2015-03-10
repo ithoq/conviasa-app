@@ -42,10 +42,10 @@ class AppController extends Controller {
  * Configuración de Componentes de Autorización, Sesión y el Plugin de AutoLogin
  */
 	public $components = array(
-		'Session' => array(),
+		//'Session' => array(),
 		'Auth' => array(
 			//Redirección después de hacer Login exitosamente
-			'loginRedirect' => array('controller' => 'crews', 'action' => 'index'),
+			'loginRedirect' => array('controller' => 'crews', 'action' => '/'),
 			//Redirección después de hacer LogOut del Usuario
 			'logoutRedirect' => array('controller' => 'users', 'action' => 'login'),
 			//Mensaje de Error al no poseer privilegios
@@ -64,7 +64,8 @@ class AppController extends Controller {
 			//El Nombre de la Cookie a Garduar en el Browser
 			'cookieName' => 'rememberMe',
 			//Tiempo de Expiración de La Cookie
-			'expires' => '+1 weeks'));
+			'expires' => '+1 month'
+			));
 
 /**
  * El Identificador del usuario en el sistema, se usa para
