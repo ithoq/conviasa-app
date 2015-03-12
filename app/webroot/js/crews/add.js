@@ -1,6 +1,6 @@
 $('#CrewSemestralDate').datepicker({
     format: "dd/mm/yyyy",
-    startDate: "today",
+    startDate: "01/01/1900",
     todayBtn: true,
     language: "es",
     multidate: false,
@@ -13,7 +13,7 @@ $('#CrewSemestralDate').datepicker({
 
 $('#CrewAnnualDate').datepicker({
     format: "dd/mm/yyyy",
-    startDate: "today",
+    startDate: "01/01/1900",
     todayBtn: true,
     language: "es",
     multidate: false,
