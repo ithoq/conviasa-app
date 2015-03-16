@@ -84,8 +84,8 @@
 								$crew['Crew']['first_name'],
 								$crew['Crew']['last_name'],
 								$crew['Crew']['role_enum'],
-								$crew['Crew']['semestral_date'],
-								$crew['Crew']['annual_date'],
+								$this->Time->format($crew['Crew']['semestral_date'], '%d/%m/%Y'),
+								$this->Time->format($crew['Crew']['annual_date'], '%d/%m/%Y'),
 								$crew['Crew']['visa'] == 1 ? __('Sí') : __('No'),
 								$this->Bs->btn(__('Editar'), array(
 									'controller' => 'crews',

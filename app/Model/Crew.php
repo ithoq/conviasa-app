@@ -178,7 +178,7 @@ class Crew extends AppModel {
 			'conditions' => array(
 				'Id' => $this->data['Crew']['id'])));
 		$futureDate = date('Y-m-d', strtotime("+7 months", strtotime($currentCrew['Crew']['semestral_date'])));
-		if (strtotime($this->data['Crew']['semestral_date']) >= strtotime($futureDate) || strtotime($this->data['Crew']['semestral_date']) < strtotime($currentCrew['Crew']['semestral_date'])) {
+		if (strtotime($this->data['Crew']['semestral_date']) >= strtotime($futureDate)) {
 			return false;
 		} else {
 			return true;
@@ -194,7 +194,7 @@ class Crew extends AppModel {
 			'conditions' => array(
 				'Id' => $this->data['Crew']['id'])));
 		$futureDate = date('Y-m-d', strtotime("+12 months", strtotime($currentCrew['Crew']['annual_date'])));
-		if (strtotime($this->data['Crew']['annual_date']) >= strtotime($futureDate) || strtotime($this->data['Crew']['annual_date']) < strtotime($currentCrew['Crew']['annual_date'])) {
+		if (strtotime($this->data['Crew']['annual_date']) >= strtotime($futureDate)) {
 			return false;
 		} else {
 			return true;
