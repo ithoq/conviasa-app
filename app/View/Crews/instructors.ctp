@@ -32,7 +32,7 @@
 				<!-- /.panel-heading -->
 				<div class="panel-body">
 					<div class="dataTable_wrapper">
-						<table class="table table-striped table-bordered" id="crews">
+						<table class="table table-striped table-bordered" id="instructors">
 							<?php  ?>
 							<thead>
 								<?php echo $this->Html->tableHeaders(array(
@@ -63,48 +63,53 @@
 									$datediffSemestral = abs($now - $crew['Crew']['semestral_date']);
 									$datediffSemestral = floor($datediffSemestral/(60*60*24));
 									if ($datediffSemestral <= 60) {
-										$crew['Crew']['semestral_date'] = '<b style="color: red">' . $this->Time->format($crew['Crew']['semestral_date'], '%d/%m/%Y') . '</b>';
+										$crew['Crew']['semestral_date'] = '<td style="font-weight: bold; color: red">' . $this->Time->format($crew['Crew']['semestral_date'], '%d/%m/%Y') . '</td>';
 									} else {
-										$crew['Crew']['semestral_date'] = '<b>' . $this->Time->format($crew['Crew']['semestral_date'], '%d/%m/%Y') . '</b>';
+										$crew['Crew']['semestral_date'] = '<td style="font-weight: bold;">' . $this->Time->format($crew['Crew']['semestral_date'], '%d/%m/%Y') . '</td>';
 									}
 									$datediffAnnual = abs($now - $crew['Crew']['annual_date']);
 									$datediffAnnual = floor($datediffAnnual/(60*60*24));
 									if ($datediffAnnual <= 60) {
-										$crew['Crew']['annual_date'] = '<b style="color: red">' . $this->Time->format($crew['Crew']['annual_date'], '%d/%m/%Y') . '</b>';
+										$crew['Crew']['annual_date'] = '<td style="font-weight: bold; color: red">' . $this->Time->format($crew['Crew']['annual_date'], '%d/%m/%Y') . '</td>';
 									} else {
-										$crew['Crew']['annual_date'] = '<b>' . $this->Time->format($crew['Crew']['annual_date'], '%d/%m/%Y') . '</b>';
+										$crew['Crew']['annual_date'] = '<td style="font-weight: bold;">' . $this->Time->format($crew['Crew']['annual_date'], '%d/%m/%Y') . '</td>';
 									}
 									$form =
 									$this->BsForm->create('Crew', array('action' => 'delete/' . $crew['Crew']['id'], 'id' => 'CrewDelete' . $crew['Crew']['id'])) .
 									__('<p>¿Seguro que desea eliminar el tripulante <b>%s</b>?</p>', $crew['Crew']['name']) .
-									$this->BsForm->end();
-									echo $this->Html->tableCells(array(
-										$crew['Crew']['first_name'],
-										$crew['Crew']['last_name'],
-										$crew['Crew']['semestral_date'],
-										$crew['Crew']['annual_date'],
-										$crew['Crew']['visa'] == 1 ? __('Sí') : __('No'),
-										$this->Bs->btn(__('Editar'), array(
-											'controller' => 'crews',
-											'action' => 'edit',
-											$crew['Crew']['id']),
+									$this->BsForm->end(); ?>
+									<tr>
+										<td><?php echo $crew['Crew']['first_name'] ?></td>
+										<td><?php echo $crew['Crew']['last_name'] ?></td>
+										<?php echo $crew['Crew']['semestral_date'] ?>
+										<?php echo $crew['Crew']['annual_date'] ?>
+										<td><?php echo $crew['Crew']['visa'] == 1 ? __('Sí') : __('No'); ?></td>
+										<td>
+										<?php
+											echo $this->Bs->btn(__('Editar'), array(
+												'controller' => 'crews',
+												'action' => 'edit',
+												$crew['Crew']['id']),
+												array(
+													'size' => 'xs',
+													'tag' => 'a',
+													'type' => 'warning')) . ' ' .
+											$this->Bs->modal(
+											__('Eliminar Tripulante'),
+											$form, array('form' => true),
 											array(
-												'size' => 'xs',
-												'tag' => 'a',
-												'type' => 'warning')) . ' ' .
-										$this->Bs->modal(
-										__('Eliminar Tripulante'),
-										$form, array('form' => true),
-										array(
-										'close' => array(
-											'name' => __('Cancelar'),
-											'class' => 'btn-primary'),
-										'open' => array(
-											'name' => __('Eliminar'),
-											'class' => 'btn-danger btn-xs'),
-										'confirm' => array(
-											'name' => __('Eliminar'),
-								'class' => 'btn-danger'))))); ?>
+											'close' => array(
+												'name' => __('Cancelar'),
+												'class' => 'btn-primary'),
+											'open' => array(
+												'name' => __('Eliminar'),
+												'class' => 'btn-danger btn-xs'),
+											'confirm' => array(
+												'name' => __('Eliminar'),
+											'class' => 'btn-danger')));
+											?>
+										</td>
+									</tr>
 								<?php
 								endforeach;
 								?>
@@ -120,5 +125,5 @@
 	</div>
 	<!-- /.row -->
 	<?php $this->append('script'); ?>
-	<?php echo $this->Html->script('/js/crews/index'); ?>
+	<?php echo $this->Html->script('/js/crews/instructors'); ?>
 	<?php $this->end();

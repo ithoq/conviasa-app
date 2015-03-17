@@ -1,11 +1,10 @@
 $(document).ready(function() {
-    $('#final').DataTable({
+    $('#instructors').DataTable({
     	"aoColumns": [
             null,
             null,
-            null,
             { "sType": "date-uk" },
-            null,
+            { "sType": "date-uk" }, 
             null,
             null,
         ]});

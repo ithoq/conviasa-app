@@ -32,7 +32,7 @@
       <!-- /.panel-heading -->
       <div class="panel-body">
         <div class="dataTable_wrapper">
-          <table class="table table-striped table-bordered">
+          <table class="table table-striped table-bordered" id="final">
           	<?php  ?>
             <thead>
             <?php echo $this->Html->tableHeaders(array(
@@ -53,22 +53,24 @@
 								$datediff = abs($now - $train['Train']['date']);
 								$datediff = floor($datediff/(60*60*24));
 								if ($datediff <= 60) {
-									$train['Train']['date'] = '<b style="color: red">' . $this->Time->format($train['Train']['date'], '%d/%m/%Y') . '</b>';
+									$train['Train']['date'] = '<td style="font-weight: bold; color: red">' . $this->Time->format($train['Train']['date'], '%d/%m/%Y') . '</td>';
 								} else {
-									$train['Train']['date'] = '<b>' . $this->Time->format($train['Train']['date'], '%d/%m/%Y') . '</b>';
+									$train['Train']['date'] = '<td>' . $this->Time->format($train['Train']['date'], '%d/%m/%Y') . '</td>';
 								}
 							$form =
 							$this->BsForm->create('Train', array('action' => 'delete/' . $train['Train']['id'], 'id' => 'TrainDelete' . $train['Train']['id'])) .
 							__('<p>¿Seguro que desea eliminar el entrnamiento?</p>') .
-							$this->BsForm->end();
-							echo $this->Html->tableCells(array(
-								$train['Train']['slot'],
-								$train['Train']['captain'],
-								$train['Train']['oficer'],
-								$train['Train']['date'],
-								$train['Train']['instructor'],
-								$train['Train']['place'],
-								$this->Bs->btn(__('Editar'), array(
+							$this->BsForm->end(); ?>
+							<tr>
+								<td><?php echo $train['Train']['slot'] ?></td>
+								<td><?php echo $train['Train']['captain'] ?></td>
+								<td><?php echo $train['Train']['oficer'] ?></td>
+								<?php echo $train['Train']['date'] ?>
+								<td><?php echo $train['Train']['instructor'] ?></td>
+								<td><?php echo $train['Train']['place']?></td>
+								<td>
+								<?php
+								echo $this->Bs->btn(__('Editar'), array(
 									'controller' => 'trains',
 									'action' => 'edit',
 									$train['Train']['id']),
@@ -88,7 +90,9 @@
 									'class' => 'btn-danger btn-xs'),
 								'confirm' => array(
 									'name' => __('Eliminar'),
-									'class' => 'btn-danger'))))); ?>
+									'class' => 'btn-danger'))); ?>
+								</td>
+							</tr>
 						<?php
 						endforeach;
 						?>
@@ -103,3 +107,8 @@
   <!-- /.col-lg-12 -->
 </div>
 <!-- /.row -->
+
+<!-- /.row -->
+<?php $this->append('script'); ?>
+<?php echo $this->Html->script('/js/trains/index'); ?>
+<?php $this->end();

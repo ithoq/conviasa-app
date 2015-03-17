@@ -32,7 +32,7 @@
 				<!-- /.panel-heading -->
 				<div class="panel-body">
 					<div class="dataTable_wrapper">
-						<table class="table table-striped table-bordered" id="crews">
+						<table class="table table-striped table-bordered" id="proposal">
 							<?php  ?>
 							<thead>
 								<?php echo $this->Html->tableHeaders(array(
@@ -57,26 +57,26 @@
 							<tbody>
 								<?php
 								for ($i = 0; $i < $index; $i++) :
-									$captainName = '';
-									$captainSemestral = '';
-									$captainAnnual = '';
-									$oficerName = '';
-									$oficerSemestral = '';
-									$oficerAnnual = '';
+									$captainName = '<td></td>';
+									$captainSemestral = '<td></td>';
+									$captainAnnual = '<td></td>';
+									$oficerName = '<td></td>';
+									$oficerSemestral = '<td></td>';
+									$oficerAnnual = '<td></td>';
 									if (isset($captains[$i])) {
 										if ($captains[$i]['Crew']['visa'] == 1) {
-											$captainName = '<span style="color: green"><b>' . $captains[$i]['Crew']['name'] . '</b></span>';
+											$captainName = '<td style="font-weight: bold; color: green">' . $captains[$i]['Crew']['name'] . '</td>';
 										} else {
-											$captainName = '<span style="color: blue"><b>' . $captains[$i]['Crew']['name'] . '</b></span>';
+											$captainName = '<td style="font-weight: bold; color: blue">' . $captains[$i]['Crew']['name'] . '</td>';
 										}
 										$captainSemestral = $captains[$i]['Crew']['semestral_date'];
 										$captainAnnual = $captains[$i]['Crew']['annual_date'];
 									}
 									if (isset($oficers[$i])) {
 										if ($oficers[$i]['Crew']['visa'] == 1) {
-											$oficerName = '<span style="color: green"><b>' . $oficers[$i]['Crew']['name'] . '</b></span>';
+											$oficerName = '<td style="font-weight: bold; color: green">' . $oficers[$i]['Crew']['name'] . '</td>';
 										} else {
-											$oficerName = '<span style="color: blue"><b>' . $oficers[$i]['Crew']['name'] . '</b></span>';
+											$oficerName = '<td style="font-weight: bold; color: blue">' . $oficers[$i]['Crew']['name'] . '</td>';
 										}
 										$oficerSemestral = $oficers[$i]['Crew']['semestral_date'];
 										$oficerAnnual = $oficers[$i]['Crew']['annual_date'];
@@ -90,21 +90,21 @@
 										$datediffSemestral = abs($now - $captainSemestral);
 										$datediffSemestral = floor($datediffSemestral/(60*60*24));
 										if ($datediffSemestral <= 60) {
-											$captainSemestral = '<span style="color: red">' . $this->Time->format($captainSemestral, '%d/%m/%Y') . '</span>';
+											$captainSemestral = '<td style="color: red">' . $this->Time->format($captainSemestral, '%d/%m/%Y') . '</td>';
 										} else {
-											$captainSemestral = $this->Time->format($captainSemestral, '%d/%m/%Y');
+											$captainSemestral = '<td>' . $this->Time->format($captainSemestral, '%d/%m/%Y') . '</td>';
 										}
 										$datediffAnnual = abs($now - $captainAnnual);
 										$datediffAnnual = floor($datediffAnnual/(60*60*24));
 										if ($datediffAnnual <= 60) {
-											$captainAnnual = '<span style="color: red">' . $this->Time->format($captainAnnual, '%d/%m/%Y') . '</span>';
+											$captainAnnual = '<td style="color: red">' . $this->Time->format($captainAnnual, '%d/%m/%Y') . '</td>';
 										} else {
-											$captainAnnual = $this->Time->format($captainAnnual, '%d/%m/%Y');
+											$captainAnnual = '<td>' . $this->Time->format($captainAnnual, '%d/%m/%Y') . '</td>';
 										}
 									}
 									//En Date Captain
 									
-									//Date Captains
+									//Date Oficers
 									if ($oficerSemestral != '' && $oficerAnnual != '') {
 										$now = time(); // or your date as well
 										$oficerSemestral = strtotime($oficerSemestral);
@@ -113,26 +113,28 @@
 										$datediffSemestral = abs($now - $oficerSemestral);
 										$datediffSemestral = floor($datediffSemestral/(60*60*24));
 										if ($datediffSemestral <= 60) {
-											$oficerSemestral = '<span style="color: red">' . $this->Time->format($oficerSemestral, '%d/%m/%Y') . '</span>';
+											$oficerSemestral = '<td style="color: red">' . $this->Time->format($oficerSemestral, '%d/%m/%Y') . '</td>';
 										} else {
-											$oficerSemestral = $this->Time->format($oficerSemestral, '%d/%m/%Y');
+											$oficerSemestral = '<td>' . $this->Time->format($oficerSemestral, '%d/%m/%Y') . '</td>';
 										}
 										$datediffAnnual = abs($now - $oficerAnnual);
 										$datediffAnnual = floor($datediffAnnual/(60*60*24));
 										if ($datediffAnnual <= 60) {
-											$oficerAnnual = '<span style="color: red">' . $this->Time->format($oficerAnnual, '%d/%m/%Y') . '</span>';
+											$oficerAnnual = '<td style="color: red">' . $this->Time->format($oficerAnnual, '%d/%m/%Y') . '</td>';
 										} else {
-											$oficerAnnual = $this->Time->format($oficerAnnual, '%d/%m/%Y');
+											$oficerAnnual = '<td>' . $this->Time->format($oficerAnnual, '%d/%m/%Y') . '</td>';
 										}
 									}
-									//En Date Captain
-									echo $this->Html->tableCells(array(
-										$captainName,
-										$captainSemestral,
-										$captainAnnual,
-										$oficerName,
-										$oficerSemestral,
-										$oficerAnnual)); ?>
+									//En Date Oficers
+									?>
+									<tr>
+										<?php echo $captainName ?>
+										<?php echo $captainSemestral ?>
+										<?php echo $captainAnnual ?>
+										<?php echo $oficerName ?>
+										<?php echo $oficerSemestral ?>
+										<?php echo $oficerAnnual ?>
+									</tr>
 								<?php
 								endfor;
 								?>
@@ -148,5 +150,5 @@
 	</div>
 	<!-- /.row -->
 	<?php $this->append('script'); ?>
-	<?php echo $this->Html->script('/js/crews/index'); ?>
+	<?php echo $this->Html->script('/js/crews/proposal'); ?>
 	<?php $this->end();
