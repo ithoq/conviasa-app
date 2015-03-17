@@ -136,14 +136,14 @@ class CrewsController extends AppController {
 			'conditions' => array(
 				'role' => 'cap'),
 			'order' => array(
-				'semestral_date DESC',
+				'semestral_date ASC',
 				'annual_date',
 				'visa DESC')));
 		$oficers = $this->Crew->find('all', array(
 			'conditions' => array(
 				'role' => 'cop'),
 			'order' => array(
-				'semestral_date DESC',
+				'semestral_date ASC',
 				'annual_date',
 				'visa DESC')));
 		if (count($captains) > count($oficers)) {

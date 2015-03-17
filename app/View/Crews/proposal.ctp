@@ -82,7 +82,7 @@
 										$oficerAnnual = $oficers[$i]['Crew']['annual_date'];
 									}
 									//Date Captains
-									if ($captainSemestral != '' && $captainAnnual != '') {
+									if ($captainSemestral != '<td></td>' && $captainAnnual != '<td></td>') {
 										$now = time(); // or your date as well
 										$captainSemestral = strtotime($captainSemestral);
 										$captainAnnual = strtotime($captainAnnual);
@@ -105,7 +105,7 @@
 									//En Date Captain
 									
 									//Date Oficers
-									if ($oficerSemestral != '' && $oficerAnnual != '') {
+									if ($oficerSemestral != '<td></td>' && $oficerAnnual != '<td></td>') {
 										$now = time(); // or your date as well
 										$oficerSemestral = strtotime($oficerSemestral);
 										$oficerAnnual = strtotime($oficerAnnual);
@@ -150,5 +150,5 @@
 	</div>
 	<!-- /.row -->
 	<?php $this->append('script'); ?>
-	<?php echo $this->Html->script('/js/crews/proposal'); ?>
+	<?php //echo $this->Html->script('/js/crews/proposal'); ?>
 	<?php $this->end();
